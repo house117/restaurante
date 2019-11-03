@@ -15,27 +15,25 @@
   <div class="footer-center col-md-4 col-sm-6">
     <div>
       <i class="fa fa-map-marker"></i>
-      <p><span> Street name and number</span> City, Country</p>
+      <p><span> Puerto Angel 4 Mza. 8 </span> Xoxollywood, Oaxaca</p>
     </div>
     <div>
       <i class="fa fa-phone"></i>
-      <p> (+00) 0000 000 000</p>
+      <p> (951) 1310436</p>
     </div>
     <div>
       <i class="fa fa-envelope"></i>
-      <p><a href="#"> office@company.com</a></p>
+      <p><a href="#"> megatortas@company.com</a></p>
     </div>
   </div>
   <div class="footer-right col-md-4 col-sm-6">
-    <h2> McDonald's<span> Me encanta</span></h2>
+    <h2> MegaTortas<span> Me encanta</span></h2>
     <p class="menu">
-      <a href="#"> Home</a> |
-      <a href="#"> About</a> |
-      <a href="#"> Services</a> |
-      <a href="#"> Portfolio</a> |
-      <a href="#"> News</a> |
-      <a href="#"> Contact</a>
+      <a href="#"> Inicio</a> |
+      <a href="#"> Carrito </a> |
+      <a href="#"> Acerca de nosotros</a> |
+      <a href="#"> Contacto</a> |
     </p>
-    <p class="name"> Company Name &copy; 2016</p>
+    <p class="name"> MegaTortas &copy; 2019</p>
   </div>
 </footer>
