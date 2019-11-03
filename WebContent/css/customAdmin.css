@@ -1,0 +1,100 @@
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+.vertical-nav {
+	min-width: 17rem;
+	width: 17rem;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+	transition: all 0.4s;
+}
+
+.page-content {
+	width: calc(100% - 17rem);
+	margin-left: 17rem;
+	transition: all 0.4s;
+}
+
+/* for toggle behavior */
+#sidebar.active {
+	margin-left: -17rem;
+}
+
+#content.active {
+	width: 100%;
+	margin: 0;
+}
+
+@media ( max-width : 768px) {
+	#sidebar {
+		margin-left: -17rem;
+	}
+	#sidebar.active {
+		margin-left: 0;
+	}
+	#content {
+		width: 100%;
+		margin: 0;
+	}
+	#content.active {
+		margin-left: 17rem;
+		width: calc(100% - 17rem);
+	}
+}
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*
+*/
+body {
+	background: #141E30; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #243B55, #141E30);
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #243B55, #141E30);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+.separator {
+	margin: 3rem 0;
+	border-bottom: 1px dashed #fff;
+}
+
+.text-uppercase {
+	letter-spacing: 0.1em;
+}
+
+.text-gray {
+	color: #aaa;
+}
+
+/*TABLE*/
+.table-fixed tbody {
+	height: 300px;
+	overflow-y: auto;
+	width: 100%;
+}
+
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td,
+	.table-fixed th {
+	display: block;
+}
+
+.table-fixed tbody td, .table-fixed tbody th, .table-fixed thead>tr>th {
+	float: left;
+	position: relative; &:: after { content : '';
+	clear: both;
+	display: block;
+}
+}
