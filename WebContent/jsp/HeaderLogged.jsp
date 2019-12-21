@@ -29,23 +29,7 @@
 						href="http://localhost:8080/Restaurante/jsp/AboutUsLogged.jsp">Acerca
 							de nosotros</a></li>
 				</ul>
-				<!-- NO HAY SESIÓN INICIADA -->
-				<div class="py-4 px-3 mb-4 bg-light">
-					<div class="media d-flex align-items-center">
-						<img
-							src="https://media.licdn.com/dms/image/C4E03AQEcvg4CkWuljQ/profile-displayphoto-shrink_200_200/0?e=1576713600&v=beta&t=uATXHsPkTp-4E_mBNNTkb_TO7BO8ko4xbQefsk_JeUw"
-							alt="..." width="65"
-							class="mr-3 rounded-circle img-thumbnail shadow-sm">
-						<div class="media-body">
-							<h6 class="m-0">José Flores</h6>
-							<a href="http://localhost:8080/Restaurante/jsp/MiPerfil.jsp"
-								class="">Mi perfil</a> | <a
-								href="http://localhost:8080/Restaurante/jsp/Landing.jsp"
-								class="">Cerrar sesión</a>
-						</div>
-					</div>
-				</div>
-				<!-- NO HAY SESIÓN INICIADA -->
+				
 			</div>
 		</nav>
 	</div>

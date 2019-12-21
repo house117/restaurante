@@ -16,7 +16,9 @@
 	padding: 50px;
 	margin-top: 50px;
 }
-
+.cartForm{
+display: inline-block;
+}
 .footer .footer-left, .footer .footer-center, .footer .footer-right {
 	display: inline-block;
 	vertical-align: top;

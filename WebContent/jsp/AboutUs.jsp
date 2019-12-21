@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="dao.EmpresaDAO"%>
+<%@page import="models.EmpresaModel"%>
+
+<%
+	EmpresaModel empresa = EmpresaDAO.getEmpresa();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,35 +15,36 @@
 </head>
 <style>
 .social-link {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  border-radius: 50%;
-  transition: all 0.3s;
-  font-size: 0.9rem;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #ddd;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #666;
+	border-radius: 50%;
+	transition: all 0.3s;
+	font-size: 0.9rem;
 }
 
-.social-link:hover,
-.social-link:focus {
-  background: #ddd;
-  text-decoration: none;
-  color: #555;
+.social-link:hover, .social-link:focus {
+	background: #ddd;
+	text-decoration: none;
+	color: #555;
 }
 </style>
 <body>
-<jsp:include page="./Header.jsp"></jsp:include>
+	<jsp:include page="./Header.jsp"></jsp:include>
 	<div class="bg-light">
 		<div class="container py-5">
 			<div class="row h-100 align-items-center py-5">
 				<div class="col-lg-6">
 					<h1 class="display-4">Mega Tortas</h1>
-					<p class="lead text-muted mb-0">Somos los amos de la torta :3, a través de los años nos hemos preocupado por llevarle
-					las mejores tortas hasta su mensa, desde 1834, MegaTortas ha complacido a toda las personas de la galaxia, haciéndose
-					el puesto de tortas número uno a nivel universal, nuestras tortas no tienen igual.</p>
+					<p class="lead text-muted mb-0">Somos los amos de la torta :3,
+						a través de los años nos hemos preocupado por llevarle las mejores
+						tortas hasta su mensa, desde 1834, MegaTortas ha complacido a toda
+						las personas de la galaxia, haciéndose el puesto de tortas número
+						uno a nivel universal, nuestras tortas no tienen igual.</p>
 					<p class="lead text-muted">
 						Creado por <a href="https://house-soft.000webhostapp.com/"
 							class="text-muted"> <u>House-Soft</u></a>
@@ -58,17 +65,18 @@
 				<div class="col-lg-6 order-2 order-lg-1">
 					<i class="fa fa-handshake-o fa-2x mb-3 text-primary"></i>
 					<h2 class="font-weight-light">Ponte en contacto con nosotros</h2>
-					<p class="font-italic text-muted mb-4">A través de nuestras redes sociales, puedes interactuar con MegaTortas :)</p>
+					<p class="font-italic text-muted mb-4">A través de nuestras
+						redes sociales, puedes interactuar con MegaTortas :)</p>
 					<ul class="social mb-0 list-inline mt-3">
-							<li class="list-inline-item"><a href="#" class="social-link"><i
-									class="fa fa-facebook-f"></i></a></li>
-							<li class="list-inline-item"><a href="#" class="social-link"><i
-									class="fa fa-twitter"></i></a></li>
-							<li class="list-inline-item"><a href="#" class="social-link"><i
-									class="fa fa-instagram"></i></a></li>
-							<li class="list-inline-item"><a href="#" class="social-link"><i
-									class="fa fa-linkedin"></i></a></li>
-						</ul>
+						<li class="list-inline-item"><a href="<%=empresa.getFacebook_empresa() %>" class="social-link" ><i
+								class="fa fa-facebook-f"></i></a></li>
+						<li class="list-inline-item"><a href="<%=empresa.getTwitter_empresa() %>" class="social-link"><i
+								class="fa fa-twitter"></i></a></li>
+						<li class="list-inline-item"><a href="<%=empresa.getInstagram_empresa() %>" class="social-link"><i
+								class="fa fa-instagram"></i></a></li>
+						<li class="list-inline-item"><a href="<%=empresa.getLinkedin_empresa() %>" class="social-link"><i
+								class="fa fa-linkedin"></i></a></li>
+					</ul>
 					<!-- <a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn
 						More</a> -->
 				</div>
@@ -87,8 +95,10 @@
 				<div class="col-lg-6">
 					<i class="fa  fa-bolt fa-2x mb-3 text-primary"></i>
 					<h2 class="font-weight-light">Nuevo sistema de tienda online</h2>
-					<p class="font-italic text-muted mb-4">Sólo haz tu pedido y la torta llega a tu mesa.</p>
-					<a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Ordena AHORA</a>
+					<p class="font-italic text-muted mb-4">Sólo haz tu pedido y la
+						torta llega a tu mesa.</p>
+					<a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Ordena
+						AHORA</a>
 				</div>
 			</div>
 		</div>
@@ -108,26 +118,26 @@
 				<div class="col-xl-3 col-sm-6 mb-5">
 					<div class="bg-white rounded shadow-sm py-5 px-4">
 						<img
-							src="https://res.cloudinary.com/mhmd/image/upload/v1556834132/avatar-4_ozhrib.png"
+							src="https://scontent.fmid1-1.fna.fbcdn.net/v/t1.0-9/p720x720/39568644_2194500260808550_2092685946976731136_o.jpg?_nc_cat=101&_nc_ohc=07G698_nri0AQkM9gUjihST7rFsRxwpldks9TiEGpmn0-loZ3ldFQR0nQ&_nc_ht=scontent.fmid1-1.fna&oh=1b849c4eb8b3f37437b245861603d78e&oe=5E8BAC80"
 							alt="" width="100"
 							class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-						<h5 class="mb-0">Ponciana Jiménez</h5>
-						<span class="small text-uppercase text-muted">CEO - Founder</span>
+						<h5 class="mb-0"> José House Stinson</h5>
+						<span class="small text-uppercase text-muted">CEO - Fundador</span>
 						<ul class="social mb-0 list-inline mt-3">
-							<li class="list-inline-item"><a href="#" class="social-link"><i
+							<li class="list-inline-item"><a href="https://www.facebook.com/joseflores117" class="social-link"><i
 									class="fa fa-facebook-f"></i></a></li>
-							<li class="list-inline-item"><a href="#" class="social-link"><i
+							<li class="list-inline-item"><a href="https://twitter.com/frozenhouse17" class="social-link"><i
 									class="fa fa-twitter"></i></a></li>
-							<li class="list-inline-item"><a href="#" class="social-link"><i
+							<li class="list-inline-item"><a href="https://www.instagram.com/house117/" class="social-link"><i
 									class="fa fa-instagram"></i></a></li>
-							<li class="list-inline-item"><a href="#" class="social-link"><i
+							<li class="list-inline-item"><a href="https://www.linkedin.com/in/joseflores17/" class="social-link"><i
 									class="fa fa-linkedin"></i></a></li>
 						</ul>
 					</div>
 				</div>
 				<!-- End-->
+ <!--  
 
-				<!-- Team item-->
 				<div class="col-xl-3 col-sm-6 mb-5">
 					<div class="bg-white rounded shadow-sm py-5 px-4">
 						<img
@@ -148,9 +158,7 @@
 						</ul>
 					</div>
 				</div>
-				<!-- End-->
 
-				<!-- Team item-->
 				<div class="col-xl-3 col-sm-6 mb-5">
 					<div class="bg-white rounded shadow-sm py-5 px-4">
 						<img
@@ -171,9 +179,7 @@
 						</ul>
 					</div>
 				</div>
-				<!-- End-->
 
-				<!-- Team item-->
 				<div class="col-xl-3 col-sm-6 mb-5">
 					<div class="bg-white rounded shadow-sm py-5 px-4">
 						<img
@@ -194,8 +200,7 @@
 						</ul>
 					</div>
 				</div>
-				<!-- End-->
-
+-->
 			</div>
 		</div>
 	</div>

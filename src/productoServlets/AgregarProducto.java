@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProductoDAO;
-import model.ProductoModel;
+import models.ProductoModel;
 
 /**
  * Servlet implementation class AgregarUsuario
@@ -50,7 +50,7 @@ public class AgregarProducto extends HttpServlet {
 		ProductoModel producto = new ProductoModel(nombre_producto, categoria_producto, urlimagen_producto, descripcion_producto, cantidad_producto);
 		int status = ProductoDAO.agregar(producto);
 		if(status == 1) {
-			response.sendRedirect(request.getContextPath()+"/jsp/AdminProductos.jsp?activo=Adminproductos");
+			response.sendRedirect(request.getContextPath()+"/jsp/AdminUsuarios.jsp?activo=AdminUsuarios");
 		}
 		
 	}

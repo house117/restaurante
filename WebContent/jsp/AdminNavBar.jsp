@@ -4,10 +4,10 @@
 <!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center"><img src="https://media.licdn.com/dms/image/C4E03AQEcvg4CkWuljQ/profile-displayphoto-shrink_200_200/0?e=1576713600&v=beta&t=uATXHsPkTp-4E_mBNNTkb_TO7BO8ko4xbQefsk_JeUw" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+    <div class="media d-flex align-items-center"><img src="<%=session.getAttribute("usuarioProfPic") %>" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
       <div class="media-body">
-        <h4 class="m-0">José Flores</h4>
-        <p class="font-weight-light text-muted mb-0">Administrador</p>
+        <h4 class="m-0"><%=session.getAttribute("usuarioNombre") %></h4>
+        <p class="font-weight-light text-muted mb-0"><%=session.getAttribute("tipoUsuario") %></p>
       </div>
     </div>
   </div>
@@ -46,23 +46,28 @@
                 Empresa
             </a>
     </li>
+     <li class="nav-item">
+      <a href="./AdminPerfil.jsp?activo=AdminPerfil" class="nav-link  <%=parametro.equals("AdminPerfil") ? "text-white bg-secondary":"text-dark" %> font-italic">
+                <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
+                Mi Perfil
+            </a>
+    </li>
   </ul>
 
   <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Acciones</p>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
-      <a href="./Landing.jsp" class="nav-link text-dark font-italic">
+    <form action="<%=request.getContextPath()%>/LogoutController2"
+				method="post">
+<input class="btn btn-danger btn-lg btn-block" type="submit" value="Cerrar sesión" ></input>
+</form>
+     <!-- <a href="./Landing.jsp" class="nav-link text-dark font-italic">
                 <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
                 Cerrar Sesión
-            </a>
+            </a> --> 
     </li>
-    <li class="nav-item">
-      <a href="./AdminPerfil.jsp" class="nav-link text-dark font-italic">
-                <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
-                Mi Perfil
-            </a>
-    </li>
+   
 
   </ul>
 </div>

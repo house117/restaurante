@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProductoDAO;
-import model.ProductoModel;
+import models.ProductoModel;
 
 /**
  * Servlet implementation class DeleteProducto

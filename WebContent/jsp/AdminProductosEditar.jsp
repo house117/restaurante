@@ -1,7 +1,10 @@
-<%@page import="model.ProductoModel"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@page import="models.ProductoModel"%>
 <%@ page import="dao.ProductoDAO"%>
+<%@page import="dao.CategoriaDAO"%>
+<%@page import="models.CategoriasModel"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +17,48 @@
 	margin-top: 15px;
 }
 </style>
+<!-- Sesion check -->
+<%
+	//allow access only if session exists
+	String user = null;
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect(request.getContextPath()+"/jsp/AdminLogin.jsp");
+	} else
+		user = (String) session.getAttribute("user");
+	String userName = null;
+	String sessionID = null;
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("user"))
+				userName = cookie.getValue();
+			if (cookie.getName().equals("JSESSIONID"))
+				sessionID = cookie.getValue();
+		}
+	}
+%>
+<%!public String getCategoriasOption(HttpServletRequest req, ProductoModel producto) {
+
+		List<CategoriasModel> listaSucursales = CategoriaDAO.getAllRecords();
+		String menuHeaders = "";
+		for (int i = 0; i < listaSucursales.size(); i++) {
+			CategoriasModel auxiliar = listaSucursales.get(i);
+			String selected = "";
+			if(producto.getCategoria_producto().equals(auxiliar.getNombre_categoria())){
+				selected = "selected";
+			}
+			menuHeaders += "<option "+selected+" >"+auxiliar.getNombre_categoria()+"</option>";
+		}
+
+		return menuHeaders;
+	}%>
+
 <body>
+
 	<%
 		String producto_seleccionado = request.getParameter("producto_seleccionado");
 		String item_actualizado = "";
+		
 		if (request.getParameter("item_actualizado") != null
 				&& request.getParameter("item_actualizado").equals("success")) {
 			item_actualizado = "";
@@ -36,7 +77,7 @@
 		<button id="sidebarCollapse" type="button"
 			class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
 			<i class="fa fa-bars mr-2"></i><small
-				class="text-uppercase font-weight-bold">MenÃº</small>
+				class="text-uppercase font-weight-bold">Menú</small>
 		</button>
 		<!-- Demo content -->
 
@@ -49,12 +90,12 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Â¿EstÃ¡s seguro?</h4>
+							<h4 class="modal-title">¿Estás seguro?</h4>
 						</div>
 						<div class="modal-body">
-							<p>Â¿Seguro que quieres actualizar este elemento?</p>
+							<p>¿Seguro que quieres actualizar este elemento?</p>
 							<p class="text-warning">
-								<small>SobreescribirÃ¡s la informaciÃ³n en la base de
+								<small>Sobreescribirás la información en la base de
 									datos.</small>
 							</p>
 						</div>
@@ -99,7 +140,7 @@
 
 			<!-- MODAL -->
 
-			<form action="<%=request.getContextPath()%>/ActualizarProducto"
+			<form action="<%=request.getContextPath()%>/ActualizarProducto2"
 				method="post">
 				<input type="hidden" id="id_producto" name="id_producto"
 					value="<%=producto.getId_producto()%>">
@@ -109,20 +150,16 @@
 						name="nombre_producto" value="<%=producto.getNombre_producto()%>" />
 				</div>
 				<div class="form-group">
-					<label for="descripcion">DescripciÃ³n del producto</label>
+					<label for="descripcion">Descripción del producto</label>
 					<textarea class="form-control" id="descripcion" rows="3"
 						name="descripcion_producto"><%=producto.getDescripcion_producto()%></textarea>
 				</div>
 				<div class="form-group">
-					<label for="categoria">CategorÃ­a</label> <select
-						class="form-control" id="categoria" name="categoria_producto"
-						value="<%=producto.getCategoria_producto()%>">
-						<option
-							<%=producto.getCategoria_producto().equals("Tortas") ? "selected" : ""%>>Tortas</option>
-						<option
-							<%=producto.getCategoria_producto().equals("Refrescos") ? "selected" : ""%>>Refrescos</option>
-						<option
-							<%=producto.getCategoria_producto().equals("Tacos") ? "selected" : ""%>>Tacos</option>
+					<label for="categoria">Categoría</label> 
+					<select
+						class="form-control" id="categoria" name="categoria_producto">
+						<%=getCategoriasOption(request, producto) %>
+						
 					</select>
 				</div>
 				<div class="form-group">
@@ -136,6 +173,13 @@
 					<label for="cantidad">Cantidad</label> <input type="number"
 						class="form-control" id="cantidad" name="cantidad_producto"
 						value="<%=producto.getCantidad_producto()%>">
+				</div>
+				<div class="form-group">
+					<label for="precioProducto">Precio</label> <input
+						type="number" step="any" class="form-control" id=""precioProducto""
+						name="precio_producto"
+						placeholder="Ej. 17.50"
+						value="<%=producto.getPrecio_producto()%>">
 				</div>
 				<p align="right">
 					<a class="btn btn-danger agregar"

@@ -12,6 +12,26 @@
 	margin-top: 15px;
 }
 </style>
+<!-- Sesion check -->
+<%
+	//allow access only if session exists
+	String user = null;
+	if (session.getAttribute("user") == null) {
+		response.sendRedirect(request.getContextPath()+"/jsp/AdminLogin.jsp");
+	} else
+		user = (String) session.getAttribute("user");
+	String userName = null;
+	String sessionID = null;
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("user"))
+				userName = cookie.getValue();
+			if (cookie.getName().equals("JSESSIONID"))
+				sessionID = cookie.getValue();
+		}
+	}
+%>
 <body>
 	<jsp:include page="./AdminNavBar.jsp"></jsp:include>
 	<!-- Page content holder -->
@@ -29,15 +49,16 @@
 		<div class="separator"></div>
 		<div class=" cointainer p-3 mb-2 bg-light text-dark">
 			<h1>Generar reporte</h1>
-			<form>
+			<form action="<%=request.getContextPath()%>/jsp/GenerarReporte.jsp">
 				<div class="form-group">
-					<label for="fechaReporteInicio">Ingresa la fecha de inicio</label> <input type="text"
-						class="form-control" id="fechaReporteInicio"
+					<label for="fechaReporteInicio">Desde qué fecha</label> <input type="date"
+						class="form-control" id="fechaReporteInicio" name="date1"
 						>
 				</div>
+				 <input type="hidden" id="custId" name="formato" value="excel">
 				<div class="form-group">
-					<label for="fechaReporteInicio">Ingresa la fecha de fin</label> <input type="date"
-						class="form-control" id="fechaReporteInicio"
+					<label for="fechaReporteInicio">Hasta qué fecha</label> <input type="date"
+						class="form-control" id="fechaReporteInicio" name="date2"
 						>
 				</div>
 				<p align="right">
@@ -47,7 +68,7 @@
 
 			</form>
 		</div>
-
+</div>
 		<!-- END DEMO -->
 </body>
 </html>

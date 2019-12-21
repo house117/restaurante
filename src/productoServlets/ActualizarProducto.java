@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProductoDAO;
-import model.ProductoModel;
+import models.ProductoModel;
 
 /**
  * Servlet implementation class ActualizarProducto
@@ -52,8 +52,7 @@ public class ActualizarProducto extends HttpServlet {
 		ProductoModel producto = new ProductoModel(id_producto, nombre_producto, categoria_producto, urlimagen_producto, descripcion_producto, cantidad_producto);
 		int status = ProductoDAO.actualizar(producto);
 		if(status == 1) {
-			response.sendRedirect(request.getContextPath()+"/jsp/AdminProductosEditar.jsp?producto_seleccionado="+producto.getId_producto()+"&item_actualizado=success&activo=AdminProductos"
-					+ "ess");
+			response.sendRedirect(request.getContextPath()+"/jsp/AdminProductosEditar.jsp?producto_seleccionado="+producto.getId_producto()+"&item_actualizado=success&activo=AdminProductos");
 		}
 	}
 

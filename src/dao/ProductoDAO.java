@@ -6,97 +6,259 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.ProductoModel;
+
+import models.ProductoModel;
 
 public class ProductoDAO {
 
 	public ProductoDAO() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public static List<ProductoModel> getAllRecords() {
-		List <ProductoModel> lista = new ArrayList<ProductoModel>();
+		List<ProductoModel> lista = new ArrayList<ProductoModel>();
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
 		try {
-			Connection con = Conexion.getConexion();
-			PreparedStatement ps = con.prepareStatement("select * from productos");
-			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			con = Conexion.getConexion();
+			ps = con.prepareStatement("select * from productos");
+			rs = ps.executeQuery();
+			while (rs.next()) {
 				ProductoModel producto = new ProductoModel();
-				producto.setId_producto(rs.getInt("id_producto"));
-				producto.setNombre_producto(rs.getString("nombre_producto"));
-				producto.setCategoria_producto(rs.getString("categoria_producto"));
-				producto.setUrlimagen_producto(rs.getString("urlimagen_producto"));
-				producto.setCantidad_producto(rs.getInt("cantidad_producto"));
-				lista.add(producto);
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return lista;
-	}
-	public static ProductoModel getRecordById(int id) {
-		ProductoModel producto = new ProductoModel();
-		Connection con = Conexion.getConexion();
-		PreparedStatement ps;
-		try {
-			ps = con.prepareStatement("select * from productos where id_producto = ?");
-			ps.setInt(1, id);
-			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
 				producto.setId_producto(rs.getInt("id_producto"));
 				producto.setDescripcion_producto(rs.getString("descripcion_producto"));
 				producto.setNombre_producto(rs.getString("nombre_producto"));
 				producto.setCategoria_producto(rs.getString("categoria_producto"));
 				producto.setUrlimagen_producto(rs.getString("urlimagen_producto"));
 				producto.setCantidad_producto(rs.getInt("cantidad_producto"));
+				producto.setPrecio_producto(rs.getDouble("precio_producto"));
+				lista.add(producto);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+				rs.close();
+				Conexion.cerrarConexion(con);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return lista;
+	}
+
+	public static List<ProductoModel> getRecordByCategoria(String categoria_producto) {
+		List<ProductoModel> lista = new ArrayList<ProductoModel>();
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = Conexion.getConexion();
+			ps = con.prepareStatement("select * from productos where categoria_producto = ?");
+			ps.setString(1, categoria_producto);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				ProductoModel producto = new ProductoModel();
+				producto.setId_producto(rs.getInt("id_producto"));
+				producto.setDescripcion_producto(rs.getString("descripcion_producto"));
+				producto.setNombre_producto(rs.getString("nombre_producto"));
+				producto.setCategoria_producto(rs.getString("categoria_producto"));
+				producto.setUrlimagen_producto(rs.getString("urlimagen_producto"));
+				producto.setCantidad_producto(rs.getInt("cantidad_producto"));
+				producto.setPrecio_producto(rs.getDouble("precio_producto"));
+				lista.add(producto);
 			}
 		} catch (SQLException e) {
 			System.out.println(e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+				rs.close();
+				Conexion.cerrarConexion(con);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return lista;
+	}
+	public static ProductoModel getRecordByName(String nombre_producto) {
+		ProductoModel producto = new ProductoModel();
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = Conexion.getConexion();
+			ps = con.prepareStatement("select * from productos where nombre_producto = ?");
+			ps.setString(1, nombre_producto);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				producto.setId_producto(rs.getInt("id_producto"));
+				producto.setDescripcion_producto(rs.getString("descripcion_producto"));
+				producto.setNombre_producto(rs.getString("nombre_producto"));
+				producto.setCategoria_producto(rs.getString("categoria_producto"));
+				producto.setUrlimagen_producto(rs.getString("urlimagen_producto"));
+				producto.setCantidad_producto(rs.getInt("cantidad_producto"));
+				producto.setPrecio_producto(rs.getDouble("precio_producto"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+				rs.close();
+				Conexion.cerrarConexion(con);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return producto;
 	}
+	public static ProductoModel getRecordById(int id) {
+		ProductoModel producto = new ProductoModel();
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = Conexion.getConexion();
+			ps = con.prepareStatement("select * from productos where id_producto = ?");
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				producto.setId_producto(rs.getInt("id_producto"));
+				producto.setDescripcion_producto(rs.getString("descripcion_producto"));
+				producto.setNombre_producto(rs.getString("nombre_producto"));
+				producto.setCategoria_producto(rs.getString("categoria_producto"));
+				producto.setUrlimagen_producto(rs.getString("urlimagen_producto"));
+				producto.setCantidad_producto(rs.getInt("cantidad_producto"));
+				producto.setPrecio_producto(rs.getDouble("precio_producto"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+				rs.close();
+				Conexion.cerrarConexion(con);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return producto;
+	}
+
 	public static int agregar(ProductoModel producto) {
 		int status = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
 		try {
-			Connection con = Conexion.getConexion();
-			PreparedStatement ps = con.prepareStatement(" INSERT into productos (nombre_producto, descripcion_producto, categoria_producto, urlimagen_producto, cantidad_producto) VALUES(?, ?, ?,?,?)" );
+			con = Conexion.getConexion();
+			ps = con.prepareStatement(
+					" INSERT into productos (nombre_producto, descripcion_producto, categoria_producto, urlimagen_producto, cantidad_producto, precio_producto) VALUES(?, ?, ?, ?, ?, ?)");
 			ps.setString(1, producto.getNombre_producto());
 			ps.setString(2, producto.getDescripcion_producto());
 			ps.setString(3, producto.getCategoria_producto());
 			ps.setString(4, producto.getUrlimagen_producto());
 			ps.setInt(5, producto.getCantidad_producto());
+			ps.setDouble(6, producto.getPrecio_producto());
 			status = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+				Conexion.cerrarConexion(con);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return status;
 	}
-	
+
 	public static int actualizar(ProductoModel producto) {
 		int status = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
 		try {
-			Connection con = Conexion.getConexion();
-			PreparedStatement ps = con.prepareStatement(" update productos  set nombre_producto=?, descripcion_producto=?, categoria_producto=?, urlimagen_producto=?, cantidad_producto=? where id_producto=?");
+			con = Conexion.getConexion();
+			ps = con.prepareStatement(
+					" update productos  set nombre_producto=?, descripcion_producto=?, categoria_producto=?, urlimagen_producto=?, cantidad_producto=?, precio_producto=? where id_producto=?");
 			ps.setString(1, producto.getNombre_producto());
 			ps.setString(2, producto.getDescripcion_producto());
 			ps.setString(3, producto.getCategoria_producto());
 			ps.setString(4, producto.getUrlimagen_producto());
 			ps.setInt(5, producto.getCantidad_producto());
-			ps.setInt(6, producto.getId_producto());
+			ps.setDouble(6, producto.getPrecio_producto());
+			ps.setInt(7, producto.getId_producto());
 			status = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+				Conexion.cerrarConexion(con);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return status;
+	}
+
+	
+	public static int actualizarCantidad(String nombre_producto,int cantidad_producto) {
+		int status = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = Conexion.getConexion();
+			ps = con.prepareStatement(
+					" update productos  set cantidad_producto=? where nombre_producto=?");
+			ps.setInt(1, cantidad_producto);
+			ps.setString(2, nombre_producto);
+
+			status = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+				Conexion.cerrarConexion(con);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return status;
 	}
 	public static int eliminar(int id) {
 		int status = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
 		try {
-			Connection con = Conexion.getConexion();
-			PreparedStatement ps = con.prepareStatement("delete from productos where id_producto=?");
+			con = Conexion.getConexion();
+			ps = con.prepareStatement("delete from productos where id_producto=?");
 			ps.setInt(1, id);
 			status = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+				Conexion.cerrarConexion(con);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return status;
 	}
